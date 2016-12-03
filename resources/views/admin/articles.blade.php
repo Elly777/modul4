@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+    <a href="/admin/article">Create</a>
     {{ $articles->links() }}
     <table class="table table-strip1ped">
         <tr>

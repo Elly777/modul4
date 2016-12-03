@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
 
+        JeroenNoten\LaravelCkEditor\ServiceProvider::class,
         //
 
         /*

@@ -31,6 +31,7 @@
     </div>
 </nav>
 
+
 <div class="container">
 
     <div class="row">
@@ -42,7 +43,19 @@
         <div class="main">
             <div class="col-md-8">
                 <div class="content">
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="/search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="q" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div><!-- /input-group -->
+                            </form>
+                        </div><!-- /.col-lg-6 -->
+                    </div>
                     @yield('content')
 
                 </div>

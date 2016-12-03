@@ -20,11 +20,26 @@ class AdminController extends Controller
 
     public function showArticle($id)
     {
-        $articles = Article::find($id);
+        $article = Article::find($id);
+        return view('admin.article', ['article' => $article]);
     }
 
-    public function edit($id)
+    public function editArticle($id, Request $request)
     {
+        $article = Article::find($id);
+        $article->fill($request->all());
+        $article->save();
+        return redirect('/admin/article/' . $id);
 
+
+    }
+    public function addArticle(Request $request)
+    {
+        $article = Article::create($request->all());
+        $article->save();
+        return redirect('/admin/article/' . $article->id);
+    }
+    public function showFormArticle(){
+        return view('admin.formArticle');
     }
 }
