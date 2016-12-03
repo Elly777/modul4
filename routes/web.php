@@ -10,7 +10,8 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/category/{id}', 'CategoryController@show');
+Route::get('/article/{id}', 'ArticleController@show');
