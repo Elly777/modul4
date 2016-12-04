@@ -3,7 +3,7 @@
 @section('content')
     <a class="btn btn-xs" href="/admin/articles">Back</a>
     <a class="btn btn-xs" target="_blank" href="/article/{{ $article->id }}">View on site</a>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
             Title: <input name="title" class="form-control" type="text" value="{{ $article->title }}"/>
@@ -30,6 +30,9 @@
                     @endif
                 @endforeach
             </select>
+        </div>
+        <div class="form-group">
+            <input type="file" name="photo" class="form-control" />
         </div>
         <div class="form-group">
             <button type="submit" class="form-control btn btn-info" >Save</button>

@@ -38,6 +38,13 @@ Route::get('/admin/comments', 'AdminController@listComments');
 Route::get('/admin/comment/{id}', 'AdminController@showComment');
 Route::post('/admin/comment/{id}', 'AdminController@editComment');
 
+Route::get('/admin/article/{article_id}/images', 'AdminController@listImages');
+Route::post('/admin/article/{article_id}/images', 'AdminController@addImage');
+Route::get('/admin/article/{article_id}/image/{id}', 'AdminController@showImage');
+Route::post('/admin/article/{article_id}/image/{id}', 'AdminController@editImage');
+Route::delete('/admin/article/{article_id}/image/{id}', 'AdminController@deleteImage');
+
+
 Route::get('/sansara/{id}/{plusMinus}', 'CommentController@sansara');
 
 

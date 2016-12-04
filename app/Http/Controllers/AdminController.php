@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Comment;
@@ -100,5 +102,34 @@ class AdminController extends Controller
         return redirect('/admin/comment/' . $id);
     }
 
-
+    public function listImages($article_id)
+    {
+        $images = Article::find($article_id)->images;
+        return view('admin.images', ['images' => $images]);
+    }
+    public function addImage($article_id, Request $request)
+    {
+        $image = Image::create($request->all());
+        $image->save();
+        Article::find($article_id)->images()->attach($image);
+        return redirect("/admin/article/{$article_id}/images");
+    }
+    public function showImage($image_id)
+    {
+        $image= Image::find($image_id);
+        return view('admin.image', ['image' => $image]);
+    }
+    public function editImage($article_id, $image_id, Request $request)
+    {
+        $image = Image::find($image_id);
+        $image->fill($request->all());
+        $image->save();
+        return redirect("/admin/article/{$article_id}/images");
+    }
+    public function deleteImage($article_id, $image_id)
+    {
+        $image = Image::find($image_id);
+        $image->delete();
+        return redirect("/admin/article/{$article_id}/images");
+    }
 }
