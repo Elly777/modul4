@@ -24,14 +24,12 @@ class AdminController extends Controller
         $articles = Article::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.articles', ['articles' => $articles]);
     }
-
     public function showArticle($id)
     {
         $article = Article::find($id);
         $categories = Category::orderBy('title')->get();
         return view('admin.article', ['article' => $article, 'categories' => $categories]);
     }
-
     public function editArticle($id, Request $request)
     {
         $article = Article::find($id);
@@ -51,23 +49,20 @@ class AdminController extends Controller
         return redirect('/admin/article/' . $article->id);
     }
     public function showFormArticle(){
-        return view('admin.formArticle');
+        return view('admin.article', ['article' => new Article]);
     }
 
     //For categories//
-
     public function listCategories()
     {
         $categories = Category::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.categories', ['categories' => $categories]);
     }
-
     public function showCategory($id)
     {
         $category = Category::find($id);
         return view('admin.category', ['category' => $category]);
     }
-
     public function editCategory($id, Request $request)
     {
         $category = Category::find($id);
@@ -75,15 +70,15 @@ class AdminController extends Controller
         $category->save();
         return redirect('/admin/category/' . $id);
     }
-    public function showFormCategory(Request $request)
+    public function addCategory(Request $request)
     {
         $category = Category::create($request->all());
         $category->save();
         return redirect('/admin/category/' . $category->id);
     }
-    public function addCategory()
+    public function showFormCategory()
     {
-        return view('admin.formCategory');
+        return view('admin.category', ['category' => new Category]);
     }
 
     public function listComments()
@@ -91,13 +86,11 @@ class AdminController extends Controller
         $comments = Comment::orderBy('created_at', 'desc')->paginate(30);
         return view('admin.comments', ['comments' => $comments]);
     }
-
     public function showComment($id)
     {
         $comment= Comment::find($id);
         return view('admin.comment', ['comment' => $comment]);
     }
-
     public function editComment($id, Request $request)
     {
         $comment = Comment::find($id);
@@ -106,9 +99,6 @@ class AdminController extends Controller
         $comment->save();
         return redirect('/admin/comment/' . $id);
     }
-    public function showFormComment()
-    {
-        return view('admin.formComment');
-    }
+
 
 }

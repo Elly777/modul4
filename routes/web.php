@@ -37,7 +37,6 @@ Route::post('/admin/category', 'AdminController@addCategory');
 Route::get('/admin/comments', 'AdminController@listComments');
 Route::get('/admin/comment/{id}', 'AdminController@showComment');
 Route::post('/admin/comment/{id}', 'AdminController@editComment');
-Route::get('/admin/comment', 'AdminController@showFormComment');
 
 Route::get('/sansara/{id}/{plusMinus}', 'CommentController@sansara');
 
