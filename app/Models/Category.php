@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    protected $fillable = ['title', 'hide_comments'];
     public function articles()
     {
         return $this->belongsToMany('App\\Models\\Article');

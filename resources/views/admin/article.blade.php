@@ -19,7 +19,18 @@
             @ckeditor('bodyField')
 
         </div>
-
+        <div class="form-group">
+            <select name="category_id" class="form-control">
+                <option value="">Not selected</option>
+                @foreach ($categories as $category)
+                    @if ($article->categories()->first() && $category->id == $article->categories()->first()->id)
+                        <option selected="true" value="{{ $category->id }}">{{ $category->title }}</option>
+                    @else
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
         <div class="form-group">
             <button type="submit" class="form-control btn btn-info" >Save</button>
         </div>

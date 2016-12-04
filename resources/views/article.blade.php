@@ -11,7 +11,7 @@
     </div>
     <div>
         <h3>Comments:</h3>
-        @foreach($article->comments()->orderBy('sansara', 'desc')->get() as $comment)
+        @foreach($article->comments()->orderBy('sansara', 'desc')->where('hidden', false)->get() as $comment)
             <div class="media">
                 <div class="media-left">
                     <a href="#">

@@ -18,4 +18,10 @@ class Article extends Model
         return $this->hasMany('App\\Models\\Comment');
     }
 
+    public function images()
+    {
+        return $this->hasMany('App\\Models\\Image');
+    }
+
+
 }

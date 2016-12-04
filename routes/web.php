@@ -21,11 +21,24 @@ Route::get('/article/{id}', 'ArticleController@show');
 Route::post('/article/{id}', 'CommentController@comment');
 Route::get('/search', 'HomeController@search');
 Route::get('/admin', 'AdminController@index');
+
 Route::get('/admin/articles', 'AdminController@listArticles');
 Route::get('/admin/article/{id}', 'AdminController@showArticle');
 Route::post('/admin/article/{id}', 'AdminController@editArticle');
 Route::get('/admin/article', 'AdminController@showFormArticle');
 Route::post('/admin/article', 'AdminController@addArticle');
+
+Route::get('/admin/categories', 'AdminController@listCategories');
+Route::get('/admin/category/{id}', 'AdminController@showCategory');
+Route::post('/admin/category/{id}', 'AdminController@editCategory');
+Route::get('/admin/category', 'AdminController@showFormCategory');
+Route::post('/admin/category', 'AdminController@addCategory');
+
+Route::get('/admin/comments', 'AdminController@listComments');
+Route::get('/admin/comment/{id}', 'AdminController@showComment');
+Route::post('/admin/comment/{id}', 'AdminController@editComment');
+Route::get('/admin/comment', 'AdminController@showFormComment');
+
 Route::get('/sansara/{id}/{plusMinus}', 'CommentController@sansara');
 
 
