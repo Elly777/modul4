@@ -105,24 +105,26 @@ class AdminController extends Controller
     public function listImages($article_id)
     {
         $images = Article::find($article_id)->images;
-        return view('admin.images', ['images' => $images]);
+        return view('admin.images', ['images' => $images, 'article_id' => $article_id]);
     }
     public function addImage($article_id, Request $request)
     {
         $image = Image::create($request->all());
+        $image->path = Storage::url($request->photo->store('public'));
         $image->save();
-        Article::find($article_id)->images()->attach($image);
+        Article::find($article_id)->images()->save($image);
         return redirect("/admin/article/{$article_id}/images");
     }
-    public function showImage($image_id)
+    public function showImage($article_id, $image_id)
     {
         $image= Image::find($image_id);
-        return view('admin.image', ['image' => $image]);
+        return view('admin.image', ['image' => $image, 'article_id' => $article_id]);
     }
     public function editImage($article_id, $image_id, Request $request)
     {
         $image = Image::find($image_id);
         $image->fill($request->all());
+        $image->path = Storage::url($request->photo->store('public'));
         $image->save();
         return redirect("/admin/article/{$article_id}/images");
     }

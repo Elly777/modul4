@@ -3,7 +3,7 @@
 @section('content')
     <a class="btn btn-xs" href="/admin/articles">Back</a>
     <a class="btn btn-xs" target="_blank" href="/article/{{ $article->id }}">View on site</a>
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST">
         {{ csrf_field() }}
         <div class="form-group">
             Title: <input name="title" class="form-control" type="text" value="{{ $article->title }}"/>
@@ -32,7 +32,7 @@
             </select>
         </div>
         <div class="form-group">
-            <input type="file" name="photo" class="form-control" />
+            <a href="/admin/article/{{ $article->id }}/images" target="__blank">View images</a>
         </div>
         <div class="form-group">
             <button type="submit" class="form-control btn btn-info" >Save</button>
