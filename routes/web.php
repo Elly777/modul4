@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/', 'HomeController@index');
 Route::get('/category/{id}', 'CategoryController@show');
 Route::get('/article/{id}', 'ArticleController@show');
+Route::post('/article/{id}', 'CommentController@comment');
 Route::get('/search', 'HomeController@search');
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/articles', 'AdminController@listArticles');
@@ -25,6 +26,8 @@ Route::get('/admin/article/{id}', 'AdminController@showArticle');
 Route::post('/admin/article/{id}', 'AdminController@editArticle');
 Route::get('/admin/article', 'AdminController@showFormArticle');
 Route::post('/admin/article', 'AdminController@addArticle');
+Route::get('/sansara/{id}/{plusMinus}', 'CommentController@sansara');
+
 
 Route::get('/test', 'HomeController@test');
 Auth::routes();

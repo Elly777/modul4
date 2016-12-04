@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-@if($article)
+@if ($article)
     <h1>{{ $article->title }}</h1>
     <div>
         {!! $article->text !!}
@@ -11,7 +11,7 @@
     </div>
     <div>
         <h3>Comments:</h3>
-        @foreach($article->comments as $comment)
+        @foreach($article->comments()->orderBy('sansara', 'desc')->get() as $comment)
             <div class="media">
                 <div class="media-left">
                     <a href="#">
@@ -23,16 +23,27 @@
                     {{ $comment->text }}
 
                     <div class="text-right">
-                        <span class="text-success">{{ $comment->sansara }}</span>
+                        <span class="text-success" id="sansara{{ $comment->id }}">{{ $comment->sansara }}</span>
                         <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                            <button class="btn btn-success">+</button>
-                            <button class="btn btn-danger">-</button>
+                            <button class="btn btn-success" onclick="return plusMinus('plus', {{ $comment->id }})">+</button>
+                            <button class="btn btn-danger" onclick="return plusMinus('minus', {{ $comment->id }})">-</button>
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
-
+        <hr>
+        @if (Auth::user())
+        <form method="post" action="/article/{{ $article->id }}">
+            {{ csrf_field() }}
+            <div class="form-group">
+                <textarea name="text" rows="3" class="form-control" placeholder="Your comment.."></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="form-control btn btn-info">Comment</button>
+            </div>
+        </form>
+        @endif
     </div>
 @endif
 
