@@ -36,6 +36,7 @@ class AdminController extends Controller
     {
         $article = Article::find($id);
         $article->fill($request->all());
+        $article->vip = $request->input('vip', 0);
         $article->save();
         if ($category = Category::find($request->input('category_id'))) {
             $article->categories()->sync([$category->id]);
@@ -47,6 +48,7 @@ class AdminController extends Controller
     public function addArticle(Request $request)
     {
         $article = Article::create($request->all());
+        $article->vip = $request->input('vip', 0);
         $article->save();
         return redirect('/admin/article/' . $article->id);
     }

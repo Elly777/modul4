@@ -34,6 +34,11 @@
         <div class="form-group">
             <a href="/admin/article/{{ $article->id }}/images" target="__blank">View images</a>
         </div>
+        <div class="checkbox"  style="font-size: 1em;">
+            <label>
+                <input type="checkbox" value="1" name="vip" {{ $article->vip ? 'checked="checked"' : '' }}> VIP (Analytics)
+            </label>
+        </div>
         <div class="form-group">
             <button type="submit" class="form-control btn btn-info" >Save</button>
         </div>

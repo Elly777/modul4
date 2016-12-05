@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,14 +19,23 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
-                <li><a href="/articles">News</a></li>
-                <li><a href="/categories">Categories</a></li>
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        Categories <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach ($menu as $item)
+                            <li><a href="/category/{{ $item->id }}">{{ $item->title }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
+                <li><a href="/analytics">Analytics</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
-               @else
+                @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -51,10 +59,8 @@
             </ul>
 
         </div>
-    </div>
+</div>
 </nav>
-
-
 <div class="container">
 
     <div class="row">
@@ -69,8 +75,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form action="/search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="q" placeholder="Search for...">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="q" placeholder="Search for...">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                         </button>
@@ -79,6 +85,14 @@
                             </form>
                         </div><!-- /.col-lg-6 -->
                     </div>
+                    @if (session('notify'))
+                        <div class="alert alert-success">
+                            {{ session('notify') }}
+                        </div>
+                    @endif
+
+
+
                     @yield('content')
 
                 </div>
@@ -87,6 +101,43 @@
         <div class="sidebar-right">
             <div class="col-md-2">
                 <em class="text-muted">Ad Block</em>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" class="modal hide fade" id="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2>News</h2>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <p>Do you want to be always in the middle of it?</p>
+                    <p>Subscribe to the newsletter now!</p>
+                </center>
+                <center>
+                    <form method="POST" id="scf-form" action="/subscribe">
+                        {{ csrf_field() }}
+                        <p><input type="text" name="name" class="form-control" placeholder="Your Name" /></p>
+                        <p><input type="email" name="email" class="form-control" placeholder="Your E-mail" /></p>
+                        <p><button class="btn btn-info" type="submit">Subscribe</button></p>
+                    </form>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" class="modal hide fade" id="modal_1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2>Do you really want to leave the site?</h2>
+                <p><input id="submit" type="submit" value="Close" name="Close" /></p>
+                </center>
             </div>
         </div>
     </div>

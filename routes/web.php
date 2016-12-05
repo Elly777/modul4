@@ -18,6 +18,8 @@ Route::get('/', function () {
 Route::get('/', 'HomeController@index');
 Route::get('/category/{id}', 'CategoryController@show');
 Route::get('/article/{id}', 'ArticleController@show');
+Route::get('/analytics', 'ArticleController@analytics');
+
 Route::post('/article/{id}', 'CommentController@comment');
 Route::get('/search', 'HomeController@search');
 Route::get('/admin', 'AdminController@index');
@@ -44,7 +46,9 @@ Route::get('/admin/article/{article_id}/image/{id}', 'AdminController@showImage'
 Route::post('/admin/article/{article_id}/image/{id}', 'AdminController@editImage');
 Route::delete('/admin/article/{article_id}/image/{id}', 'AdminController@deleteImage');
 
+Route::post('/subscribe', 'SubscriberController@subscribe');
 
+Route::get('/user/{id}', 'HomeController@user');
 Route::get('/sansara/{id}/{plusMinus}', 'CommentController@sansara');
 
 
@@ -52,3 +56,4 @@ Route::get('/test', 'HomeController@test');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+

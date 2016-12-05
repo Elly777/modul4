@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,15 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('frontend', ['categories' => $categories]);
+        $topUsers = User::withCount('comments')->orderBy('comments_count', 'desc')->take(5)->get();
+        return view('frontend', ['categories' => $categories, 'topUsers' => $topUsers]);
+    }
+
+    public function user($id)
+    {
+        $user = User::find($id);
+        $comments = $user->comments()->paginate(5);
+        return view('users', ['user' => $user, 'comments' => $comments]);
     }
     public function search(Request $request)
     {
