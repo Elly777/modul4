@@ -11,7 +11,7 @@ function func() {
     $('#modal').modal('show');
 }
 
-//setTimeout(func,5000);
+setTimeout(func, 15000);
 
-//window.onbeforeunload = function() { return "You are closing all tabs!"; }
+window.onbeforeunload = function() { return "You are closing all tabs!"; }
 

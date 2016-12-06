@@ -14,6 +14,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('moderator');
     }
 
     public function index()
@@ -53,7 +54,7 @@ class AdminController extends Controller
         return redirect('/admin/article/' . $article->id);
     }
     public function showFormArticle(){
-        return view('admin.article', ['article' => new Article]);
+        return view('admin.article', ['article' => new Article, 'categories' => Category::orderBy('title')->get()]);
     }
 
     //For categories//
@@ -71,6 +72,7 @@ class AdminController extends Controller
     {
         $category = Category::find($id);
         $category->fill($request->all());
+        $category->hide_comments = $request->input('hide_comments', 0);
         $category->save();
         return redirect('/admin/category/' . $id);
     }
